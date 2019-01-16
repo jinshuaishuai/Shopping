@@ -17,6 +17,8 @@ public class Page<E> implements Serializable {
 	private Long totalRecords;
 	//数据记录
 	private E records;
+	
+	
 	public Integer getLimit() {
 		return limit;
 	}
