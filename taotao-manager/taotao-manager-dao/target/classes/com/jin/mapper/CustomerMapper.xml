@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!--上面那一行是mapper映射约束 -->
+ 
+ <!-- 下面这一行是映射,namespace是命名空间,在访问时要加上.即
+ 
+ List<User> list = session.selectList("org.mybatis.example.User.selectAllUsers");
+  -->
+<mapper namespace="com.jin.mapper.CustomerMapper">
+
+
+<resultMap type="com.jin.pojo.Customer" id="BaseCustomerColumn">
+	<result column="id" property="id" jdbcType="INTEGER"/>
+	<result column="name" property="name" jdbcType="VARCHAR"/>
+</resultMap>
+	<!-- 查询所有用户 
+		id是用户做的查询,resultType是返回的结果集类型,select标签内部写sql语句
+	-->
+ <select id="findCustomerById" resultMap="BaseCustomerColumn" parameterType="int">
+ 	select * from customers where id = #{id}
+ </select>
+ 
+ <select id="findAllCustomer" resultMap="BaseCustomerColumn" parameterType="com.jin.pojo.Customer">
+ 	select * from customers
+ </select>
+ 
+</mapper>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+<!-- 在控制台打印sql语句 -->
+<!-- 使用的org.apache.ibatis.logging.stdout.StdOutImpl这个类 -->
+ <settings>
+ 	<setting name="logImpl" value="STDOUT_logging"/>
+ </settings>
+ 
+ <!-- 配置mybatis的分页插件 -->
+ 	<plugins>
+ 	<!-- mybatis分页插件支持mysql,Oracle,MariaDB等六个数据库 -->
+ 		<plugin interceptor="com.github.pagehelper.PageHelper">
+ 			<!-- 设置mybatis分页查询定义使用mysql数据库的分页方式,而不是Oracle,myriadb,db2等数据库,如果属性使用helperDialect,则会默认使用你所使用的数据库进行分页 -->
+ 			<property name="dialect" value="mysql"/>
+ 			<!-- 可以在分页查询的时候,进行count查询,以及使用强大的PageInfo类,需要设置该参数值为true -->
+ 			<property name="rowBoundsWithCount" value="true"/>
+ 			<!-- 配置分页合理化,当用户在跳转时输入的值<=0或大于最后一页,则默认查询第一页或最后一页的数据 -->
+ 			<property name="reasonable" value="true"/>
+ 		</plugin>
+ 	</plugins>
+ 
+</configuration>

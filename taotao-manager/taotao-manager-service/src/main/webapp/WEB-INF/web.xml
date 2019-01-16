@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://java.sun.com/xml/ns/javaee" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd" id="WebApp_ID" version="2.5">
+  <display-name>testHehe</display-name>
+  <welcome-file-list>
+    <welcome-file>index.html</welcome-file>
+    <welcome-file>index.htm</welcome-file>
+    <welcome-file>index.jsp</welcome-file>
+    <welcome-file>default.html</welcome-file>
+    <welcome-file>default.htm</welcome-file>
+    <welcome-file>default.jsp</welcome-file>
+  </welcome-file-list>
+  
+  <!-- 初始化service服务层的Spring容器 -->
+  <context-param>
+  	<param-name>contextConfigLocation</param-name>
+  	<!-- 
+  		这一步:在web容器启动的时候,将会加载applicationContext-dao.xml文件,service文件,trans文件,
+  			 分别代表dao,service,事务
+  	 -->
+  	<param-value>classpath:spring/applicationContext-*.xml</param-value>
+  	<!-- 加载spring配置文件的另一种方式.中间以逗号隔开 -->
+  <!-- 	<param-value>
+  		classpath:spring/applicationContext-dao.xml
+  		,classpath:spring/applicationContext-service.xml
+  		
+  	</param-value> -->
+  </context-param>
+   <listener>
+  	<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+  </listener>
+  
+</web-app>

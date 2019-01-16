@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ <!--上面那一行是mapper映射约束 -->
+ 
+ <!-- 下面这一行是映射,namespace是命名空间,在访问时要加上.即
+ 
+ List<User> list = session.selectList("org.mybatis.example.User.selectAllUsers");
+  -->
+<mapper namespace="com.jin.mapper.BookMapper">
+
+
+<resultMap type="com.jin.pojo.Book" id="BaseBookParameter">
+	<result column="id" property="id" jdbcType="INTEGER"/>
+	<result column="name" property="name" jdbcType="VARCHAR"/>
+	<result column="price" property="price" jdbcType="FLOAT"/>
+	<result column="author" property="author" jdbcType="VARCHAR"/>
+</resultMap>
+	<!-- 查询所有用户 
+		id是用户做的查询,resultType是返回的结果集类型,select标签内部写sql语句
+	-->
+ <select id="selectBookById" resultMap="BaseBookParameter" parameterType="int">
+ 	select * from book where id = #{id}
+ </select>
+ 
+ <select id="selectBookByBookVoWithPage" resultMap="BaseBookParameter" parameterType="java.util.Map">
+ 	select * from book where 1 = 1
+ 	<if test="params.bookId != null and params.bookId != ''">
+ 		and id = #{params.bookId}
+ 	</if>
+ 	<if test="params.bookName != null and params.bookName != ''">
+ 		and name like '%${params.bookName}%'
+ 	</if>
+ </select>
+ 
+ <update id="updateBookInfoById" parameterType="com.jin.pojo.Book">
+ 	update book set name=#{name},price=#{price},author=#{author} where id=#{id}
+ </update>
+</mapper>
